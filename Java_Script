@@ -1,0 +1,359 @@
+																												Java Script
+																									-----------------------------------
+Reference : C:\Users\g.shivaginagar\OneDrive - Accenture\WORKSPACE\JAVA_SCRIPT\Java_Script
+
+Introduction
+																									
+	1. Light weight
+	2. Cross platform
+	3. Object oriented
+
+	# One of the 3 core technologies of we development
+	# JS can be used in different places
+		1. Client-side: JS traditionally only used in the browser
+		2. Server-sode: Thanks to node.js, we can use JavaScript on the server as well.
+	# JS is what made modern web development possible.
+		1. Dynamic effect and interactivity
+		2. Modern web application that we can interact with
+	# Frameworks/libraries like React, Angular and Jquery are 100% based on JavaScript:
+
+	* HTML : Content						Nouns 		: <p></p> 			means "paragraph"
+	* CSS : Presentation (Styling)			Adjectves 	: p {color: red;}	means "the pragraph text is red"
+	* JS : Dynamic Effects/Programming		Verbs		: p.hide();			means "hide the paragrph"
+
+
+	Differant versions of JS :
+
+	ES5 --> ES6/ES2015 --> ES7/ES2016 --> ES8/ES2017
+
+Variables and Data Types
+
+	Data Types 
+		1. Numbers		:			All numbers are Floating point number. Primitive non object data type. all the number will have decimals.
+		2. String		:			Sequence of characters. used for text.
+		3. Boolean		:			logical data type that can only be true or false.
+		4. Undefined	:			Data type of a variable thast does not have a value yet. 'non-existent'
+		5. Null			:			Also means 'non-existent'.
+		
+	* JS has dynamic typing : data types are automatically assigned to variables.
+	
+	Rules while naming a variables
+		1. Variable name can not start with number
+		2. Variable name can stary with a _, $ or a letter
+		3. we can not use reserved java script names like function, Delete, if etc.
+		
+Variable Mutation and Type Coersion
+	
+	Type Coercion
+		* JS automatically converts the type to one another. Ex : Number to String.
+		* bollean value, undefined value also converted to a String
+	Variable Mutation
+		* To change the value of a variable
+		* value can be changed from number to string becuase of the JS speciality Dynamic typing.
+		* 
+
+Operators
+
+	Math Operator
+		1. -
+		2. +
+		3. *
+		4. /
+		5. %
+		
+	Logical Operator
+		1. >
+		2. <
+		3. =
+	
+	typeof Operator
+		1. typeof
+		
+Operator Precedence
+	Reference : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+	
+
+Truthy and Falsy Values
+
+	Falsy values  	: Will be converted to false when evaluated in a if else condition.
+		undefined, null, 0, '', NaN
+		var height;
+		
+		if(height) { }//false because the value of hieght is undefined
+		
+		hegiht = 0;
+		
+		if(height) { }//false because the value of height is 0.
+
+		
+		
+	Truthy values	: all the values which are not falsy
+				
+Equality operator
+
+	==		: 	Does type Coersion
+				var height = 23;
+				if(height == '23') {} //true because == does type coersion and converts string '23' to integer 23 and check for equals.
+				
+	===		: compares actual value
+				if(height === '23') {} //false beacuse === does not do type coersion and comares integer 23 with string '23' and return false.
+					
+Function Statements and Expressions
+	
+	Function Statements
+		signature
+			function functionName(parameter) { 	some statement 
+												return value }
+			function functionName(parameter, parameter) { some statement }
+			
+	Function Expressions
+		Signature
+			var varaibleName = function(parameter, parameter){  some statement };
+			
+			
+			
+			
+ES5
+-----------------------------
+	Javascript Engine:
+		* Program that executes javascript code
+		* Googles V8 Engine used in  google chrome.
+		* Spider monkey, Java script core etc are other engine.
+	
+	How Engine Works :
+		# Parser :
+			* Reads the code line by line and check if the sysntax is correct.
+			* Parser knows the rules how the JS code should be, if it finds a mistake it throws an error and stops execution
+			* if code is correct the Parser creates a dta structure called Abstarct Syntax Tree.
+			* Which is then translated to Machine Code and will be run by the machine/computer.
+			
+	
+	Execution Context (EC):
+	
+		* JS code is run in an execution context.
+		* Where the JS code is evaluvated and executed
+		* Global Execution Context is default EC
+	
+	Global Execution Context (GEC):
+		* Variable and Functions which are not inside of any other will be executed in GEC
+		* Assosiated with the global object
+		* In the browser that's the window object.
+			Ex. lastName === window.lastName.
+				* declaring lastName property is equals to declaring lastname property in window object which is global object in browser.
+				
+	
+	Execution Stack (ES):
+		* Global Execution Context is first added in this stack 
+		* every function call will have their own new Execution Context and added on top of previous Execution context in the stack.
+		* when the called function is returned then the Execution context is removed from the top of the stack.
+		
+	
+	Execution Context Object :
+		* We can assosiate and Execution Context with an Object
+		* This object hs these 3 properties
+			# Variable Object : Inner variable declarations and function declarations
+			# Scope Chain : Contains current Variable Objects and parent Variable Objects
+			# "This" variable
+	
+	How the execution context is actually created?
+		* When a function is called a new EC is put on top of ES
+		* This happens in two phase
+			1. Creation phase
+				a. Creation of the Variable Object(VO)
+				b. Creation of the scope chain
+				c. Determine value of 'this' variable
+			2. Execution phase
+				The code of the function that generated the current execution context is ran line by line.
+				If it is a global context the global code that is executed.
+				
+				
+		a. Creation of VO :
+			1. The argument object is created, containing all the arguments that were passed into the function.
+			2. Code is scanned for function declarations: for each function, a property is created in the VO, pointing to the function
+				# All the functions will be stored inside VO even before code is started to executing.
+			3. Code is scanned for variable declarations: for each variable, a property is created in the VO, and set to undefined. 
+			
+			HOISTING :
+				* The above points 2&3 are called HOISTING
+				* Finctions and varables are Hoisted in JS
+				* Which means they are available before execution actually starts.
+				* They are Hoisted in different way, the function is already defined before execution starts but variable is set to undefined and only be defined in the execution phase.
+				
+				* We can call the function before declaring the function
+				* this will work only for function declaratios but not for function expressions
+				
+		b. Creation of the Scope Chain :
+			1. Scoping ansers the question "where can we access a certain variable?"
+			2. Each new function creates a scope : the space/environment, in which the variable it defines are accessible.
+			3. Lexical scoping: a function that is lexical within another function gets access to the scope of the outer function.
+				
+		
+		c. 'This' variable
+			* Regular function call : the this keyword points at the global object, (the window object, in the browser)
+			* Method call: the 'this' variable points to the object that is calling the method.
+			* The This keyword is not assigned a value until a function where it is defined is actually called. becuase This variable resides in Execution Context Object and EC is created on function call.
+			*** Function is which always reside in Window object. A different object can have a function but it still part of window object. if you call this keyword in any function it will return window object but not the object which it is defined.
+			*** Method reside in the object which it has defined it.
+			
+	--------------------------------------------------------------------------------------------------------------------------------
+	The DOM and DOM Manupulation
+	
+		* DOM : Document Object Model
+		* Structured representation of an HTML document;
+		* The DOM is used to connect webpages to scripts like JavaScript
+		* For each HTML box, there is an object in the DOM that we can access and interact with.
+		* JS methods allow us to manipulate DOM. These methods are present in Document object.
+		
+		
+
+	Objects & 
+	
+		Objects 
+			* Everything is an object in JS (This is almost correct but not 100% correct)
+			* Java scrip has two types of values
+				1. Primitive
+					* Numbers
+					* Strings
+					* Booleans
+					* Undefined
+					* Null
+				2. Object
+					* Everything else than defined above are objects
+					* Arrays
+					* Functions
+					* Objects
+					* Dates
+					* Wrappers for Numbers, String, Booleans
+					
+		
+		Object Oriented Programing
+			* Objects interacting one another through methods and proprties.
+			* Used to store data, structure applications into modules and keeping code clean.
+			
+			
+		Constructor/ Prototype (In java it is called as Class)
+			* Blue pring which can be used to create instances or objects
+			
+		Inheritance
+			* One object is based on another object
+			
+		
+		*** JS is prototype based language
+			* which means inheritance works by using prototypes
+			* Each every object has protoype property which makes inheritance possible in JS
+			* If Person is a constuctor and Jhon is an instance of Person constructor and if Jhon has to access any method which is in Person constuctor the methods should be added in the Person's prototype property.
+			* Prototype property of an object is where we put methods and properties which we want other object to inherit it
+			* The Person's Prototype property is the Prototype of Jhon
+			* Object is the constuctor of all other objects created in JS
+			* Each object we created is an instance of Object constructor
+			* Every JS object has a prototype property, which makes inheritance possible in JS
+			
+			* The Prototype property of an object is where we put methods and properties that we want other objects to inherit.
+			* The Constructor's prototype property is not the prototype of the Constructor itself, it's the prototype of ALL instances that are created through it;
+			* When a certain method (or property) is called, the search starts in the object itself, and if it cannot be found, the search moves on to the object's prototype. This continues until the method is found, this is called prototype chain.
+		
+		
+		** Function Constructor VS Object.create
+			Object.create :
+				* Object.create builds an object that inherits directly from the one object we pass to the function argument
+				* Allows us to implement really complex inheritance by allowing us to specify which object should be a prototype.
+				
+			Function constructor :
+				* Newly created object inherits from the constructors prototype property
+				
+				
+		Primitives vs Objects
+			** Variable which are assigned a primitive value holds that value
+				Ex : var a =30;
+					 var b = a;
+					 a = 40 ;
+					 
+					 console.log(a); //Prints 40
+					 console.log(b); //Prints 30
+			
+			** Variable which are assigned a Obejct just reference to that object
+				Ex : var obj1 = {
+					name: 'john',
+					age: '30'
+				};
+				
+				var obj2 = obj1;
+				obj1.age = 40;
+				
+				//both prints 40 because both variable obj1 and obj2 is referencing/pointing to the same object.
+				console.lg(obj1.age); 
+				console.lg(obj2.age);
+				
+		Functions
+			** If the parameter passed to the function is primitive the copy of the primitive data is passed, original primitive does not change even if the passed variable value is changed.
+			** If the parameter passed to the function is an Object the reference to the object is passed any changes in the function to the reference wil be reflected in the object.
+			
+			var age = 27; primitive
+			
+			var obj = {
+				name: 'Ram''
+				city: 'Mumbai'
+			
+			function change(a, b) {
+				a = 30;
+				b.city = 'Delhi';
+			}
+			
+			change(age, obj);
+			
+			console.log(age);		// Prints 27
+			console.log(obj.city); //Prints Delhi
+			
+			* A function is an instance of the Object type.
+			* A function behaves like any other object.
+			* We can store function in a variable.
+			* We can pass a function as an argument to another function.
+			* We can return a function from a function.
+			
+			In JS we have First-Class Functions
+			
+			
+			
+		
+		Closures
+			** An inner function has always access to the variable and parameter of its oter function, even after the outer function has returned.
+			** Variable object and scope chain is remains in the memory even after function execution context is poped of the stack
+			** So inner function is able to access the variables of outer function.
+				
+				function retirement(retiermentAge) {
+				var a = ' years left until retierment';
+				return function (yearOfBirth) {
+					var age = 2019 - yearOfBirth;
+					console.log((retiermentAge - age) + a);
+					}
+				}
+
+				var retirementUS = retirement(66);
+				retirementUS(1990);
+
+				retirement(65)(1990);
+		
+			** closures are built into JS
+			
+				
+		
+			
+			
+			
+					
+			
+			
+		
+			
+			
+		
+			
+			
+		
+		
+		
+
+	
+	
+		
+		
